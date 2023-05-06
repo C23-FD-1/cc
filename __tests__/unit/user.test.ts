@@ -19,7 +19,7 @@ describe("user test", () => {
 		};
 	});
 
-	it("should create new user", async () => {
+	it("should create a new user", async () => {
 		const userCreate = {
 			name: user.name!,
 			email: user.email,
@@ -30,6 +30,29 @@ describe("user test", () => {
 		const response = await userService.create(userCreate);
 
 		expect(response).toMatchObject({
+			name: response.name,
+			email: response.email,
+		});
+	});
+
+	it("should get a user", async () => {
+		const userCreate = {
+			name: user.name!,
+			email: user.email,
+			password: user.password,
+			confirmPassword: user.password,
+		};
+
+		const response = await userService.create(userCreate);
+
+		expect(response).toMatchObject({
+			name: response.name,
+			email: response.email,
+		});
+
+		const usr = await userService.find(response.id);
+
+		expect(usr).toMatchObject({
 			name: response.name,
 			email: response.email,
 		});

@@ -2,5 +2,5 @@ module.exports = {
 	clearMocks: true,
 	preset: "ts-jest",
 	testEnvironment: "node",
-	setupFilesAfterEnv: ["./prisma/mock.jest.ts"],
+	setupFilesAfterEnv: ["./prisma/mock.ts"],
 };
