@@ -8,7 +8,7 @@ export default class UserController extends BaseResourceController {
 
 	index = async (_: Request, res: Response) => {
 		try {
-			const users = await this.service.findAllUser();
+			const users = await this.service.findAll();
 			res.status(200).send(users);
 		} catch (e) {
 			res.status(500).send(e);
@@ -18,7 +18,7 @@ export default class UserController extends BaseResourceController {
 	get = async (req: Request, res: Response) => {
 		try {
 			const id = parseInt(req.params.id);
-			const user = await this.service.findUser(id);
+			const user = await this.service.find(id);
 			res.status(200).send(user);
 		} catch (e) {
 			res.status(500).send(e);
@@ -28,7 +28,7 @@ export default class UserController extends BaseResourceController {
 	post = async (req: Request, res: Response) => {
 		try {
 			const { name, email, password, confirmPassword } = req.body;
-			const user = await this.service.createUser({ name, email, password, confirmPassword });
+			const user = await this.service.create({ name, email, password, confirmPassword });
 
 			res.status(200).send(user);
 		} catch (e) {
@@ -40,7 +40,7 @@ export default class UserController extends BaseResourceController {
 		try {
 			const { name, email } = req.body;
 			const id = parseInt(req.params.id);
-			const user = await this.service.updateUser({ id, name, email });
+			const user = await this.service.update({ id, name, email });
 			res.status(200).send(user);
 		} catch (e) {
 			res.status(500).send(e);
@@ -50,7 +50,7 @@ export default class UserController extends BaseResourceController {
 	delete = async (req: Request, res: Response) => {
 		try {
 			const id = parseInt(req.params.id);
-			const users = await this.service.deleteUser(id);
+			const users = await this.service.delete(id);
 
 			res.status(200).send(users);
 		} catch (e) {

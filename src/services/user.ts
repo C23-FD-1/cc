@@ -21,11 +21,11 @@ export default class UserService {
 		this.prismaClient = prismaClient;
 	}
 
-	async findAllUser() {
+	async findAll() {
 		return await this.prismaClient.user.findMany();
 	}
 
-	async findUser(id: number) {
+	async find(id: number) {
 		return await this.prismaClient.user.findFirst({
 			where: {
 				id,
@@ -33,7 +33,7 @@ export default class UserService {
 		});
 	}
 
-	async createUser(user: CreateUser) {
+	async create(user: CreateUser) {
 		if (user.password !== user.confirmPassword) {
 			throw new Error("The password confirmation does not match");
 		}
@@ -48,14 +48,14 @@ export default class UserService {
 			},
 		});
 	}
-	async updateUser(user: UpdateUser) {
+	async update(user: UpdateUser) {
 		return await this.prismaClient.user.update({
 			where: { id: user.id },
 			data: user,
 		});
 	}
 
-	async deleteUser(id: number) {
+	async delete(id: number) {
 		return await this.prismaClient.user.delete({
 			where: { id: id },
 		});

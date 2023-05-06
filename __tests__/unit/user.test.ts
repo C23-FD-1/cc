@@ -27,7 +27,7 @@ describe("user test", () => {
 			confirmPassword: user.password,
 		};
 
-		const response = await userService.createUser(userCreate);
+		const response = await userService.create(userCreate);
 
 		expect(response).toMatchObject({
 			name: response.name,
