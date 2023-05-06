@@ -13,7 +13,7 @@ Install all the dependencies below on your local machine:
 
 1. App calls route index
 2. Route calls controllers, grouped by each functionality
-3. Controllers handles HTTP stuff and call services (if needed)
+3. Controllers handle HTTP stuff and call services (if needed)
 4. Services are an interface to the database
 5. Models are declared inside `/prisma/schema.prisma` (TODO: atomize model declarations)
 
