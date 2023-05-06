@@ -23,11 +23,15 @@ Install all the dependencies below on your local machine:
 2. A Feature test handles domains whereas a unit test handles singular functionality
 3. Testing should be done as real as possible (database mocking is already handled)
 
+#### DevOps (TODO):
+1. Auto-tag version
+2. Containerization
+
 ### First time setup
 
 - run `npm install`
 - run `npm install -g prisma`
-- add your own `.env` file, refer to `.env.example`
+- add your own `.env` file in the root directory, refer to `.env.example`
 
 ### To start the server
 
@@ -42,3 +46,4 @@ Install all the dependencies below on your local machine:
 - Prisma ORM: https://www.prisma.io/
 - ExpressJS: https://expressjs.com/
 - Jest: https://jestjs.io/
+- Trunk Based Development: https://trunkbaseddevelopment.com/
