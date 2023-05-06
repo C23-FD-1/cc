@@ -17,8 +17,8 @@ app.use(cors());
 
 app.use(router);
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
 	console.info(`server started using port ${PORT}`);
 });
 
-export default app;
+export default server;

@@ -7,7 +7,7 @@ describe("user test", () => {
 	let user: User, userService: UserService;
 
 	beforeAll(() => {
-		userService = new UserService(prisma);
+		userService = new UserService();
 	});
 
 	beforeEach(() => {
@@ -33,6 +33,8 @@ describe("user test", () => {
 			name: response.name,
 			email: response.email,
 		});
+
+		expect(response.password).not.toBe(userCreate.password);
 	});
 
 	it("should get a user", async () => {

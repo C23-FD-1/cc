@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../prisma/client";
 import bcrypt from "bcrypt";
 
 interface CreateUser {
@@ -15,49 +15,43 @@ interface UpdateUser {
 }
 
 export default class UserService {
-	protected prismaClient: PrismaClient;
+	findAll = async () => {
+		return await prisma.user.findMany();
+	};
 
-	constructor(prismaClient: PrismaClient) {
-		this.prismaClient = prismaClient;
-	}
-
-	async findAll() {
-		return await this.prismaClient.user.findMany();
-	}
-
-	async find(id: number) {
-		return await this.prismaClient.user.findFirst({
+	find = async (id: number) => {
+		return await prisma.user.findFirst({
 			where: {
 				id,
 			},
 		});
-	}
+	};
 
-	async create(user: CreateUser) {
+	create = async (user: CreateUser) => {
 		if (user.password !== user.confirmPassword) {
 			throw new Error("The password confirmation does not match");
 		}
 		const salt = await bcrypt.genSalt();
 		const hashedPassword = await bcrypt.hash(user.password, salt);
 
-		return await this.prismaClient.user.create({
+		return await prisma.user.create({
 			data: {
 				name: user.name,
 				email: user.email,
 				password: hashedPassword,
 			},
 		});
-	}
-	async update(user: UpdateUser) {
-		return await this.prismaClient.user.update({
+	};
+	update = async (user: UpdateUser) => {
+		return await prisma.user.update({
 			where: { id: user.id },
 			data: user,
 		});
-	}
+	};
 
-	async delete(id: number) {
-		return await this.prismaClient.user.delete({
+	delete = async (id: number) => {
+		return await prisma.user.delete({
 			where: { id: id },
 		});
-	}
+	};
 }

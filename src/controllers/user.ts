@@ -1,10 +1,9 @@
 import { Request, Response } from "express";
 import BaseResourceController from "./base";
-import prisma from "../../prisma/client";
 import UserService from "../services/user";
 
 export default class UserController extends BaseResourceController {
-	private service = new UserService(prisma);
+	private service = new UserService();
 
 	index = async (_: Request, res: Response) => {
 		try {
@@ -30,7 +29,7 @@ export default class UserController extends BaseResourceController {
 			const { name, email, password, confirmPassword } = req.body;
 			const user = await this.service.create({ name, email, password, confirmPassword });
 
-			res.status(200).send(user);
+			res.status(201).send(user);
 		} catch (e) {
 			res.status(500).send(e);
 		}
