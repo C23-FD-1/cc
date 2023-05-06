@@ -1,4 +1,4 @@
-import prisma from "../../prisma/client";
+import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 
 interface CreateUser {
@@ -8,37 +8,56 @@ interface CreateUser {
 	confirmPassword: string;
 }
 
-export async function createUser(user: CreateUser) {
-	if (user.password !== user.confirmPassword) {
-		throw new Error("The password confirmation does not match");
-	}
-	const salt = await bcrypt.genSalt();
-	const hashedPassword = await bcrypt.hash(user.password, salt);
-
-	return await prisma.user.create({
-		data: {
-			name: user.name,
-			email: user.email,
-			password: hashedPassword,
-		},
-	});
-}
-
 interface UpdateUser {
 	id: number;
 	name: string;
 	email: string;
 }
 
-export async function updateUser(user: UpdateUser) {
-	return await prisma.user.update({
-		where: { id: user.id },
-		data: user,
-	});
-}
+export default class UserService {
+	protected prismaClient: PrismaClient;
 
-export async function deleteUser(id: number) {
-	return await prisma.user.delete({
-		where: { id: id },
-	});
+	constructor(prismaClient: PrismaClient) {
+		this.prismaClient = prismaClient;
+	}
+
+	async findAllUser() {
+		return await this.prismaClient.user.findMany();
+	}
+
+	async findUser(id: number) {
+		return await this.prismaClient.user.findFirst({
+			where: {
+				id,
+			},
+		});
+	}
+
+	async createUser(user: CreateUser) {
+		if (user.password !== user.confirmPassword) {
+			throw new Error("The password confirmation does not match");
+		}
+		const salt = await bcrypt.genSalt();
+		const hashedPassword = await bcrypt.hash(user.password, salt);
+
+		return await this.prismaClient.user.create({
+			data: {
+				name: user.name,
+				email: user.email,
+				password: hashedPassword,
+			},
+		});
+	}
+	async updateUser(user: UpdateUser) {
+		return await this.prismaClient.user.update({
+			where: { id: user.id },
+			data: user,
+		});
+	}
+
+	async deleteUser(id: number) {
+		return await this.prismaClient.user.delete({
+			where: { id: id },
+		});
+	}
 }

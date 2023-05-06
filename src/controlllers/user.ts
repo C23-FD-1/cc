@@ -1,12 +1,14 @@
 import { Request, Response } from "express";
 import BaseResourceController from "./base";
 import prisma from "../../prisma/client";
-import { createUser, deleteUser, updateUser } from "../services/user";
+import UserService from "../services/user";
 
 export default class UserController extends BaseResourceController {
+	private service = new UserService(prisma);
+
 	index = async (_: Request, res: Response) => {
 		try {
-			const users = await prisma.user.findMany();
+			const users = await this.service.findAllUser();
 			res.status(200).send(users);
 		} catch (e) {
 			res.status(500).send(e);
@@ -16,11 +18,7 @@ export default class UserController extends BaseResourceController {
 	get = async (req: Request, res: Response) => {
 		try {
 			const id = parseInt(req.params.id);
-			const user = await prisma.user.findFirst({
-				where: {
-					id,
-				},
-			});
+			const user = await this.service.findUser(id);
 			res.status(200).send(user);
 		} catch (e) {
 			res.status(500).send(e);
@@ -30,7 +28,7 @@ export default class UserController extends BaseResourceController {
 	post = async (req: Request, res: Response) => {
 		try {
 			const { name, email, password, confirmPassword } = req.body;
-			const user = await createUser({ name, email, password, confirmPassword });
+			const user = await this.service.createUser({ name, email, password, confirmPassword });
 
 			res.status(200).send(user);
 		} catch (e) {
@@ -42,7 +40,7 @@ export default class UserController extends BaseResourceController {
 		try {
 			const { name, email } = req.body;
 			const id = parseInt(req.params.id);
-			const user = await updateUser({ id, name, email });
+			const user = await this.service.updateUser({ id, name, email });
 			res.status(200).send(user);
 		} catch (e) {
 			res.status(500).send(e);
@@ -52,7 +50,7 @@ export default class UserController extends BaseResourceController {
 	delete = async (req: Request, res: Response) => {
 		try {
 			const id = parseInt(req.params.id);
-			const users = await deleteUser(id);
+			const users = await this.service.deleteUser(id);
 
 			res.status(200).send(users);
 		} catch (e) {

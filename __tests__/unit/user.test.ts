@@ -1,10 +1,14 @@
-import { createUser, updateUser } from "../../src/services/user";
 import { User } from "@prisma/client";
 import { faker } from "@faker-js/faker";
 import { prisma } from "../../prisma/__mocks__/index";
+import UserService from "../../src/services/user";
 
 describe("user test", () => {
-	let user: User;
+	let user: User, userService: UserService;
+
+	beforeAll(() => {
+		userService = new UserService(prisma);
+	});
 
 	beforeEach(() => {
 		user = {
@@ -23,13 +27,8 @@ describe("user test", () => {
 			confirmPassword: user.password,
 		};
 
-		const response = await prisma.user.create({
-			data: {
-				name: user.name,
-				email: user.email,
-				password: user.password,
-			},
-		});
+		const response = await userService.createUser(userCreate);
+
 		expect(response).toMatchObject({
 			name: response.name,
 			email: response.email,
