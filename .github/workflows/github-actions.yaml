@@ -30,7 +30,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "18.x"
-      - name: Clean install and run test
-        run: npm cit
+      - name: Clean install
+        run: npm ci
+      - name: Run tests
+        run: npm test
         env:
           DATABASE_URL: "postgresql://postgres:root@localhost:5432/postgres"
