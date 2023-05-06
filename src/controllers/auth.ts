@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import AuthService from "../services/auth";
-import prisma from "../../prisma/client";
 import jwt from "jsonwebtoken";
 
 export default class AuthController {

@@ -1,6 +1,5 @@
 import { User } from "@prisma/client";
 import { faker } from "@faker-js/faker";
-import { prisma } from "../../prisma/__mocks__/index";
 import UserService from "../../src/services/user";
 
 describe("user test", () => {
