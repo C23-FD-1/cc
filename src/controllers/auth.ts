@@ -9,11 +9,9 @@ export default class AuthController {
 		try {
 			const { email, password } = req.body;
 			const payload = await this.service.login({ email, password });
-
 			const accessToken = jwt.sign(payload, process.env.JWT_SECRET!, {
 				expiresIn: "15m",
 			});
-
 			const refreshToken = jwt.sign(payload, process.env.JWT_SECRET!, {
 				expiresIn: "30d",
 			});

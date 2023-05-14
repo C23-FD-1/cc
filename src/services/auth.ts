@@ -1,10 +1,6 @@
 import { prisma } from "../../prisma/client";
 import bcrypt from "bcrypt";
-
-interface AuthRequest {
-	email: string;
-	password: string;
-}
+import { AuthRequest } from "../interfaces/auth";
 
 export default class AuthService {
 	login = async ({ email, password }: AuthRequest) => {

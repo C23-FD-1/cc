@@ -1,18 +1,6 @@
 import { prisma } from "../../prisma/client";
 import bcrypt from "bcrypt";
-
-interface CreateUser {
-	name: string;
-	email: string;
-	password: string;
-	confirmPassword: string;
-}
-
-interface UpdateUser {
-	id: number;
-	name: string;
-	email: string;
-}
+import { CreateUser, UpdateUser } from "../interfaces/user";
 
 export default class UserService {
 	findAll = async () => {
@@ -42,6 +30,7 @@ export default class UserService {
 			},
 		});
 	};
+
 	update = async (user: UpdateUser) => {
 		return await prisma.user.update({
 			where: { id: user.id },

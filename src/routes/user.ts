@@ -1,9 +1,11 @@
 import { Router } from "express";
 import UserController from "../controllers/user";
+import { authenticate } from "../middlewares/auth";
 
 const userRouter = Router();
 const controller = new UserController();
 
+userRouter.use(authenticate);
 userRouter.get("/", controller.index);
 userRouter.get("/:id", controller.get);
 userRouter.post("/", controller.post);

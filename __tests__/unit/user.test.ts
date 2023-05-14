@@ -20,7 +20,7 @@ describe("user test", () => {
 
 	it("should create a new user", async () => {
 		const userCreate = {
-			name: user.name!,
+			name: user.name,
 			email: user.email,
 			password: user.password,
 			confirmPassword: user.password,

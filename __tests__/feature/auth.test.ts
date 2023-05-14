@@ -2,12 +2,14 @@ import { faker } from "@faker-js/faker";
 import UserService from "../../src/services/user";
 import supertest from "supertest";
 import server from "../../";
+import { User } from "@prisma/client";
 
 describe("auth test", () => {
-	let user: any, userService: UserService;
+	let user: User, userService: UserService;
 
 	beforeAll(async () => {
 		user = {
+			id: parseInt(faker.random.numeric(1)),
 			name: faker.name.firstName(),
 			email: faker.internet.email(),
 			password: faker.internet.password(),
@@ -22,7 +24,7 @@ describe("auth test", () => {
 		server.close(done);
 	});
 
-	it("user should login", async () => {
+	it("should log a user in", async () => {
 		const response = await supertest(server)
 			.post("/auth")
 			.send({
