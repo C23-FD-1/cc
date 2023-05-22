@@ -5,6 +5,8 @@ import "reflect-metadata";
 import router from "./src/routes";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import CONST from "./src/constants/normalization";
+import path from "path";
 
 dotenv.config();
 
@@ -19,6 +21,8 @@ app.use(cookieParser());
 app.use(cors());
 
 app.use(router);
+
+app.use(express.static("public"));
 
 const server = app.listen(PORT, () => {
 	console.info(`server started using port ${PORT}`);
