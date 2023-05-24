@@ -31,6 +31,7 @@ export default class UserController extends BaseResourceController {
 
 			res.status(201).send(user);
 		} catch (e) {
+			console.log(e);
 			res.status(500).send(e);
 		}
 	};

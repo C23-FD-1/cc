@@ -13,9 +13,23 @@ const fileFilter = (_: e.Request, file: Express.Multer.File, cb: multer.FileFilt
 	cb(null, true);
 };
 
+const destination = (_: e.Request, file: Express.Multer.File, cb: DestinationCallback): void => {
+	cb(null, "./uploads");
+};
+
+const filename = (_: e.Request, file: Express.Multer.File, cb: FileNameCallback): void => {
+	const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+	cb(null, file.fieldname + "-" + uniqueSuffix + path.extname(file.originalname));
+};
+
+const storage = multer.diskStorage({
+	destination,
+	filename,
+});
+
 const upload = multer({
 	fileFilter,
-	dest: "./uploads",
+	storage,
 });
 
 export default upload;

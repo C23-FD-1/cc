@@ -31,7 +31,7 @@ export default class AuthController {
 
 			res.status(200).json({ name: payload.name, accessToken });
 		} catch (e) {
-			res.status(500).send(e);
+			res.status(500).send("Invalid Credentials");
 		}
 	};
 }
