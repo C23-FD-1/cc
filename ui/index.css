@@ -1,0 +1,302 @@
+.desktop-1-child {
+  top: -19px;
+  background: linear-gradient(
+    249.16deg,
+    rgba(0, 140, 235, 0.87) 17.54%,
+    #ddeefa
+  );
+  height: 1800px;
+}
+.desktop-1-item {
+  top: 0;
+  background-color: #008ceb;
+  height: 124px;
+  display: none;
+}
+.fraud-detector {
+  position: absolute;
+  top: 43px;
+  left: 850px;
+}
+
+th {
+  background-color: var(--color-darkslateblue);
+  color: #ffffff;
+}
+
+table {
+  color:white;
+  border-collapse: collapse;
+  position: absolute;
+  top: 910px;
+  left: 1050px;
+  font-size: 15px;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+th, td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.table-scroll tbody {
+  position: absolute;
+  overflow-y: scroll;
+  height: 300px;
+}
+
+.table-scroll tr {
+  width: 100%;
+  table-layout: fixed;
+  display: inline-table;
+}
+
+.image-1-icon,
+.image-2-icon {
+  position: absolute;
+  top: 33px;
+  left: 55px;
+  width: 201px;
+  height: 59px;
+  object-fit: cover;
+}
+.image-2-icon {
+  top: 320px;
+  left: 1152px;
+  height: 280px;
+}
+.group-child {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  border-radius: var(--br-11xl);
+  background-color: #1f3879;
+  width: 500px;
+  height: 60px;
+}
+.div,
+.upload-file {
+  position: absolute;
+  font-weight: 900;
+}
+
+.hasil {
+  position: absolute;
+  font-weight: 900;
+  position: absolute;
+  top: 675px;
+  left: 1100px;
+  width: 231px;
+  font-size: 23px;
+  color: var(--color-darkslateblue)
+}
+
+.preview {
+  position: absolute;
+  font-weight: 900;
+  position: absolute;
+  top: 780px;
+  left: 1100px;
+  width: 231px;
+  font-size: 23px;
+  color: var(--color-darkslateblue)
+}
+
+.div {
+  top: 58px;
+  left: 595px;
+  display: inline-block;
+  width: 36px;
+  height: 41px;
+}
+.upload-file {
+  top: 0;
+  left: 12px;
+  font-size: 23px;
+  color: var(--color-darkslateblue)
+}
+
+.rectangle-parent {
+  position: absolute;
+  top: 675px;
+  left: 200px;
+  width: 231px;
+}
+.rectangle-parent,
+.span {
+  color: var(--color-black);
+}
+.untuk {
+  color: var(--color-white);
+}
+.periksa-pengguna-untuk {
+  margin: 0;
+}
+.yang {
+  color: var(--color-white);
+}
+.container {
+  position: absolute;
+  top: 262px;
+  left: 640px;
+  font-size: 55px;
+  font-weight: 900;
+  display: inline-block;
+  width: 661px;
+  color: var(--color-darkslateblue);
+}
+.image-3-icon {
+  position: absolute;
+  top: 160px;
+  left: 543px;
+  width: 118.92px;
+  height: 118.92px;
+  object-fit: cover;
+}
+
+.box{
+  display: flex;
+}
+
+.box-1{
+  width:50%;
+}
+
+.box-2{
+  width:50%;
+}
+
+.desktop-1 {
+  position: relative;
+  background-color: var(--color-white);
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-size-11xl);
+  color: var(--color-white);
+  font-family: var(--font-lato);
+}
+.desktop-1-input {
+  position: absolute;
+  top: 738px;
+  left: 225px;
+  width: 631px;
+  height: 113px;
+}
+
+.click{
+  position: absolute;
+  top: 860px;
+  left: 400px;
+}
+
+.sepuluh{
+  position: absolute;
+  top: 850px;
+  left: 1100px;
+}
+
+.seratus{
+  position: absolute;
+  top: 850px;
+  left: 1150px;
+}
+
+.notes p{
+  position: absolute;
+  top: 810px;
+  left: 215px;
+  font-size: 15px;
+  color: black;
+}
+
+.notes-2{
+  position: absolute;
+  top: 1520px;
+  left: 1100px;
+  font-size: 15px;
+  color: black;
+}
+
+/* .rectangle {
+  position: absolute;
+  top: 910px;
+  left: 1090px;
+  width: 549px; 
+  height: 150px; 
+  background-color: #1f3879;
+  border-radius: 15px; 
+} */
+
+.rect-1 {
+  position: absolute;
+  top: 620px;
+  left: 50px;
+  width: 850px; 
+  height: 350px; 
+  border-radius: 15px; 
+  background-color: #ddeefa;
+}
+
+.rect-2 {
+  position: absolute;
+  top: 620px;
+  left: 1010px;
+  width: 850px; 
+  height: 1050px; 
+  border-radius: 15px; 
+  background-color: #ddeefa;
+}
+
+.notes-3{
+  position: absolute;
+  top: 820px;
+  left: 1100px;
+  font-size: 15px;
+  color: black;
+}
+
+.total{
+  position: absolute;
+  top: 720px;
+  left: 1100px;
+  font-size: 15px;
+  color: black;
+}
+
+.sp{
+  position: absolute;
+  top: 750px;
+  left: 1100px;
+  font-size: 15px;
+  color: black;
+}
+
+.form-group{
+  position: absolute;
+  top: 0.1px;
+  left: 20px;
+  width: 631px;
+  height: 113px;
+}
+
+.download .btn {
+  position: absolute;
+  border: none;
+  color: black;
+  cursor: pointer;
+  font-size: 20px;
+  top: 1515px;
+  left: 1670px;
+  padding: 12px 30px;
+}
+
+.download .btn:hover {
+  background-color: RoyalBlue;
+}
+
+
+/* @media only screen and (max-width:500px) {
+  body {
+    width: 100%;
+  }
+} */
