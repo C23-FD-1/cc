@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+
+:root {
+  --font-lato: Lato;
+  --font-size-6xl: 25px;
+  --font-size-11xl: 30px;
+  --color-white: #fff;
+  --color-darkslateblue: #2e429d;
+  --color-black: #000;
+  --br-11xl: 30px;
+}
+
+/*# sourceMappingURL=index.689f5f05.css.map */
