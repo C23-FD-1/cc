@@ -5,8 +5,6 @@ import "reflect-metadata";
 import router from "./src/routes";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import CONST from "./src/constants/normalization";
-import path from "path";
 
 dotenv.config();
 
@@ -18,7 +16,12 @@ app.use(bodyParser.json());
 
 app.use(cookieParser());
 
-app.use(cors());
+app.use(
+	cors({
+		origin: "*",
+		allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"],
+	})
+);
 
 app.use(router);
 

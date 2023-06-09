@@ -13,7 +13,7 @@ const fileFilter = (_: e.Request, file: Express.Multer.File, cb: multer.FileFilt
 	cb(null, true);
 };
 
-const destination = (_: e.Request, file: Express.Multer.File, cb: DestinationCallback): void => {
+const destination = (_: e.Request, __: Express.Multer.File, cb: DestinationCallback): void => {
 	cb(null, "./uploads");
 };
 

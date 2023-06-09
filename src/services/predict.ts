@@ -8,6 +8,7 @@ import NormalizationParams from "../constants/normalization";
 import IResult from "../interfaces/res";
 import timestampConverter from "../helpers/timestampConverter";
 import oneHotEncode from "../helpers/encoder";
+import { prisma } from "../../prisma/client";
 
 export default class PredictService {
 	private rows: IRow[] = [];
@@ -15,9 +16,9 @@ export default class PredictService {
 	private input: number[][] = [];
 	private params = new NormalizationParams();
 	private result: IResult[] = [];
-	public outName: string = "";
 	private file;
-	private is_scammer: number[] = [];
+	private scammer: number = 0;
+	private path: string = "";
 
 	constructor(dir: string) {
 		this.file = createReadStream(dir);
@@ -44,7 +45,6 @@ export default class PredictService {
 	public drop = () => {
 		return new Promise<void>((resolve) => {
 			this.rows = this.rows.map(({ uid, "": _, is_scammer, source, ...element }) => {
-				this.is_scammer.push(is_scammer as number);
 				this.result.push({
 					uid: uid!,
 				});
@@ -190,6 +190,8 @@ export default class PredictService {
 			this.result.forEach((result, index) => {
 				result.predictScore = Number(predictionValues[index]);
 				result.isScammer = Number(predictionValues[index]) > 0.5 ? 1 : 0;
+
+				this.scammer += result.isScammer == 1 ? 1 : 0;
 			});
 
 			resolve();
@@ -197,19 +199,54 @@ export default class PredictService {
 	};
 
 	public export = () => {
-		return new Promise<void>((resolve) => {
+		return new Promise<string>(async (resolve) => {
 			const csvContent = [
 				["uid", "predictionScore", "isScammer"].join(","),
 				...this.result.map((obj) => obj.uid + "," + obj.predictScore + "," + obj.isScammer),
 			].join("\n");
 
 			const outName = `${uuidv4()}.csv`;
-			const exportPath = path.join(__dirname, "../../../public/out", outName);
-			writeFileSync(exportPath, csvContent, "utf-8");
+			const outDir = path.join(__dirname, "../../../public/out", outName);
+			this.path = "/public/out/" + outName;
+			writeFileSync(outDir, csvContent, "utf-8");
 
-			this.outName = outName;
+			await prisma.predictionHistory.create({
+				data: { file: this.path },
+			});
 
-			resolve();
+			resolve(outName);
+		});
+	};
+
+	public getPredictions = () => {
+		return new Promise<any[][]>((resolve) => {
+			const arr: any[][] = [["uid", "predictionScore", "isScammer"]];
+
+			this.result.forEach((ele) => {
+				arr.push([ele.uid, +ele.predictScore!, +ele.isScammer!]);
+			});
+			resolve(arr);
+		});
+	};
+
+	public getNumericData = () => {
+		interface Numeric {
+			percentage: number;
+			scammer: number;
+		}
+
+		return new Promise<Numeric>(async (resolve) => {
+			const [percentage, scammer] = [this.scammer / this.result.length, this.scammer];
+
+			await prisma.predictionHistory.update({
+				where: { file: this.path },
+				data: {
+					scammer_percentage: percentage,
+					scammer_count: scammer,
+				},
+			});
+
+			resolve({ percentage, scammer });
 		});
 	};
 }

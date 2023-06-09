@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import PredictService from "../services/predict";
 import { unlink, unlinkSync } from "fs";
+import { prisma } from "../../prisma/client";
 
 export default class PredictController {
 	upload = async (req: Request, res: Response) => {
@@ -13,11 +14,24 @@ export default class PredictController {
 			await pred.hotEncode();
 			await pred.clip();
 			await pred.consumeModel();
-			await pred.export();
+			const url = await pred.export();
+			const numericData = await pred.getNumericData();
 
 			unlinkSync(path);
 
-			res.status(200).redirect("http://localhost:8000/out/" + pred.outName);
+			res.status(200).json({
+				url: url,
+				percentage: numericData.percentage,
+				scammer: numericData.scammer,
+			});
 		}
+	};
+
+	history = async (_: Request, res: Response) => {
+		const history = await prisma.predictionHistory.findMany();
+
+		res.status(200).json({
+			history,
+		});
 	};
 }

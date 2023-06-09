@@ -13,3 +13,10 @@ model User {
   name  String?
   password String
 }
+
+model PredictionHistory {
+  id Int @id @default(autoincrement())
+  scammer_percentage Float?
+  scammer_count Int?
+  file String @unique
+}
