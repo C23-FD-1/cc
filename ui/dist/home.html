@@ -72,8 +72,8 @@ csvFileInput.addEventListener("change", function() {
       </div>
       
       <div class="hasil">Summary</div>
-      <div class="total">Input :    users</div>
-      <div class="sp">Scammers Predicted :    %</div>
+      <div class="total">Input:<span id="reading-input"></span> users</div>
+      <div class="sp">Scammers Predicted: <span id="reading-sp"></span>%</div>
       <div class="preview">Preview</div>
       <div class="rectangle"></div>
       <div class="notes-2">
@@ -88,7 +88,7 @@ csvFileInput.addEventListener("change", function() {
           <p>Pilih jumlah preview data yang ditampilkan</p>
         </div>
         <button onclick="generateTable10()" type="button" class="btn btn-dark sepuluh btn-sm">10</button>
-        <button onclick="generateTable100()" type="button" class="btn btn-dark seratus btn-sm">100</button>
+        <!-- <button  onclick="generateTable100()" type="button" class="btn btn-dark seratus btn-sm">100</button> -->
       </div>
 
 

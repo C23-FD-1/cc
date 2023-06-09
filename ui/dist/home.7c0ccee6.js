@@ -5,20 +5,20 @@ function uploadCSV() {
     if (file) {
         const formData = new FormData();
         formData.append("file", file);
-        fetch("https://1546-36-69-110-154.ngrok-free.app/pred", {
+        fetch("https://c913-114-122-77-17.ngrok-free.app/pred", {
             method: "POST",
             body: formData
         }).then(async (res)=>{
             body = await res.json();
             console.log(body.url);
-        // generateTable();
+        // generateTable10();
         }).catch((error)=>{
             console.error("Error:", error);
         });
     }
 }
 function generateTable10() {
-    fetch(body.url).then((response)=>response.text()).then((csvData)=>{
+    fetch("https://c913-114-122-77-17.ngrok-free.app/out/" + body.url).then((response)=>response.text()).then((csvData)=>{
         const tableContainer = document.getElementById("table-container");
         const table = document.createElement("table");
         const rows = csvData.split("\n");
@@ -44,29 +44,20 @@ function generateTable10() {
         console.error("Error:", error);
     });
 }
-function generateTable100() {
-    fetch(body.url).then((response)=>response.text()).then((csvData)=>{
-        const tableContainer = document.getElementById("table-container");
-        const table = document.createElement("table");
-        const rows = csvData.split("\n");
-        const headerRow = document.createElement("tr");
-        rows[0].split(",").forEach((cellData)=>{
-            const th = document.createElement("th");
-            th.textContent = cellData;
-            headerRow.appendChild(th);
-        });
-        table.appendChild(headerRow);
-        for(let i = 1; i < 101; i++){
-            const rowData = rows[i].split(",");
-            const row = document.createElement("tr");
-            rowData.forEach((cellData)=>{
-                const td = document.createElement("td");
-                td.textContent = cellData;
-                row.appendChild(td);
-            });
-            table.appendChild(row);
+function summary() {
+    fetch("https://c913-114-122-77-17.ngrok-free.app/pred", {
+        method: "GET"
+    }).then((response)=>response.json()).then((data)=>{
+        var readingsp = document.getElementById("reading-sp");
+        var readinginp = document.getElementById("reading-input");
+        var temp = " ";
+        var temp2 = " ";
+        for(let i = 0; i < data.length; i++){
+            temp = data.scammer_percentage[i];
+            readingsp.appendChild(temp);
+            temp2 = data.scammer_count[i];
+            readinginp.appendChild(temp2);
         }
-        tableContainer.appendChild(table);
     }).catch((error)=>{
         console.error("Error:", error);
     });

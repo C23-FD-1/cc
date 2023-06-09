@@ -23,19 +23,31 @@ th {
 }
 
 table {
-  color: #fff;
+  color: #000;
   border-collapse: collapse;
   min-width: 400px;
   font-size: 15px;
   position: absolute;
   top: 910px;
-  left: 1050px;
+  left: 1100px;
   box-shadow: 0 0 20px #00000026;
 }
 
 th, td {
   text-align: center;
   padding: 12px 15px;
+}
+
+.table-scroll tbody {
+  height: 300px;
+  position: absolute;
+  overflow-y: scroll;
+}
+
+.table-scroll tr {
+  width: 100%;
+  table-layout: fixed;
+  display: inline-table;
 }
 
 .image-1-icon, .image-2-icon {

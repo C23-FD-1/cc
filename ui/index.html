@@ -46,7 +46,7 @@
               <label for="exampleFormControlFile1"></label>
               <input type="file" accept=".csv" class="desktop-1-input" id="csvFileInput" defaultchecked="{true}" readonly required>
               <a href="/home.html">
-                <button id="upload-button" onclick="uploadCSV()" type="button" class="btn btn-dark click btn-lg" disabled >Periksa</button>
+                <button id="upload-button" onclick="uploadCSV()" onclick="summary()" type="button" class="btn btn-dark click btn-lg" disabled >Periksa</button>
               </a>
             </div>
           </form>
@@ -76,7 +76,6 @@
           <div class="notes">
             <p>Upload file dalam format .csv</p>
           </div>
-
     </div>
 
     <script src="app.js"></script>
